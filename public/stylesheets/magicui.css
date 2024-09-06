@@ -1,0 +1,15 @@
+.border-beam {
+    display: inline-block;
+    border-style: solid;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 4px; /* Optional: adds rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+    background-color: #fff; /* Optional: background color */
+  }
+  
+  /* Optional: Add hover effect */
+  .border-beam:hover {
+    background-color: #f0f0f0;
+  }
+  

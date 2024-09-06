@@ -1,0 +1,31 @@
+{
+  "name": "merakiraana",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Anzer Bin Ubaid",
+  "license": "ISC",
+  "description": "MeraKiraana is a web application for purchasing groceries and daily essentials. Built using Express.js and Node.js, it utilizes MongoDB with Mongoose for the database, EJS for frontend templating, and implements Google OAuth with Passport and JWT for secure authentication and authorization.",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.0",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "razorpay": "^2.9.4"
+  },
+  "devDependencies": {
+    "chalk": "^5.3.0"
+  }
+}
