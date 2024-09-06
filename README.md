@@ -63,10 +63,12 @@ JWT_KEY=your_jwt_secret_key
 RAZORPAY_KEY_ID=your_razorpay_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
-### Run the Application
+### Run the Application after Setting Up Google Outh
 ```bash
 node app.js 
 ```
+The application will now be running at http://localhost:3000.
+
 ###  Setting up Google OAuth for MeraKiraana, follow these steps:
 
 ### 1. Create a Project in Google Developer Console
@@ -131,5 +133,4 @@ node app.js
 2. Enter your address and click **Get Order** to place the order in the database.
 
 
-The application will now be running at http://localhost:3000.
 
