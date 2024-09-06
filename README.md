@@ -93,7 +93,7 @@ node app.js
   - Click **Save and Continue** and return to the dashboard.
 - Under **Create OAuth 2.0 Client IDs**, select **Web Application**.
   - Add a **Name** (e.g., "MeraKiraana Web App").
-  - Under **Authorized Redirect URIs**, add http://localhost:5000/auth/google/callback (or your deployed URL).
+  - Under **Authorized Redirect URIs**, add http://localhost:3000/auth/google/callback (or your deployed URL).
   - Click **Create**.
 
 ### 4. Download OAuth Credentials
@@ -131,5 +131,5 @@ node app.js
 2. Enter your address and click **Get Order** to place the order in the database.
 
 
-The application will now be running at http://localhost:5000.
+The application will now be running at http://localhost:3000.
 
