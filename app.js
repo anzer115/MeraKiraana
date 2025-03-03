@@ -16,8 +16,9 @@ const userRouter = require('./routes/user') ;
 const cartRouter = require('./routes/cart') ;
 const paymentRouter = require('./routes/payment') ;
 const orderRouter = require('./routes/order') ;
+const cors = require('cors');
 
-
+app.use(cors());
 app.use(cookieParser()) ;
 app.set('view engine','ejs') ;
 app.use(express.static(path.join(__dirname,'public'))) ;

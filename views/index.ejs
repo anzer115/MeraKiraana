@@ -14,6 +14,20 @@
             height: 200px;
             background-color: #f0f0f0;
         }
+       
+#fix{
+    margin-bottom: 3px;
+    height: 100px;
+
+}
+#fixbtn{
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+#fixdiv{
+    margin-top: 3px;
+}
+
     </style>
 
     <body class="bg-gray-100 font-sans">
@@ -82,15 +96,15 @@
                     </h2>
                     <div class="grid grid-cols-4 gap-4 mt-4">
                         <% products[key].forEach(elem=>{ %>
-                            <div class="flex flex-col items-center">
+                            <div class="flex flex-col items-center" id="fixdiv">
                                 <img src="data:image/jpg;base64, <%= elem.image.toString('base64') %>"
-                                    alt="<%= elem.name %>" class="w-24 rounded">
+                                    alt="<%= elem.name %>" class="w-24 rounded" id="fix">
                                 <p class="text-sm text-center mt-2">
                                     <%= elem.name %>
                                 </p>
                                 <p class="font-bold">₹<%= elem.price %><br>
                                 <a class="px-4 text-white text-xs rounded mt-2 inline-block py-1 bg-[#7c1034]"
-                                    href="/cart/add/<%= elem._id %>">ADD</a>
+                                    href="/cart/add/<%= elem._id %>" id="fixbtn">ADD</a>
                             </div>
                             <%}) %>
                     </div>

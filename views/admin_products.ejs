@@ -15,18 +15,6 @@
             <!-- Main content -->
             <main class="flex-1 overflow-y-auto">
                 <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                    <!-- Search Bar -->
-                    <div class="mb-6">
-                        <form action="/admin/products/search" method="GET" class="flex">
-                            <input type="text" name="product_id" placeholder="Search by Product ID"
-                                class="w-full p-2 border border-gray-300 rounded-l">
-                            <button type="submit"
-                                class="bg-[#7c1034] text-white py-2 px-4 rounded-r hover:bg-[#7c1034]">
-                                Search
-                            </button>
-                        </form>
-                    </div>
-
                     <!-- Product List by Category -->
                     <% for(let key in products){ %>
                         <div class="bg-white shadow rounded-lg mb-6 p-6">
