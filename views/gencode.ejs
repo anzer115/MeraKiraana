@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AI Grocery Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f5f5f5;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      margin: auto;
+    }
+
+    input,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #540303;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a10909;
+    }
+
+    #status {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+  
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Generate Ingredients from Dish</h2>
+    <input type="text" id="dish" placeholder="Enter Dish Name">
+    <button onclick="generateAndAdd()">Generate Cart</button>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    async function generateAndAdd() {
+      const dish = document.getElementById('dish').value.trim();
+      const statusDiv = document.getElementById('status');
+
+      if (!dish) {
+        statusDiv.innerText = "Please enter a dish name!";
+        return;
+      }
+
+      try {
+        statusDiv.innerText = "Generating ingredients...";
+
+        // Step 1: Call /gencode
+        const gencodeResponse = await fetch('/ai/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ dish })
+        });
+        const gencodeData = await gencodeResponse.json();
+
+        if (!gencodeResponse.ok) {
+          throw new Error(gencodeData.message || "Error generating ingredients");
+        }
+
+        const ingredients = gencodeData.ingredients;
+
+        if (!ingredients || ingredients.length === 0) {
+          statusDiv.innerText = "No ingredients found for the given dish.";
+          return;
+        }
+
+        statusDiv.innerText = "Adding ingredients to cart...";
+
+        // Step 2: Call /cart/add-generated
+        const addCartResponse = await fetch('/cart/add-generated', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ingredients })
+        });
+
+        // if (!addCartResponse.ok) {
+        //   const addCartData = await addCartResponse.text();
+        //   throw new Error(addCartData || "Error adding ingredients to cart");
+        // }
+
+        statusDiv.innerText = "Ingredients added to cart successfully! 🎉";
+
+      } catch (error) {
+        console.error(error);
+
+      }
+
+      setTimeout(() => {
+        window.location.href = "/cart";
+      }, 1000);
+
+    }
+  </script>
+
+</body>
+
+</html>

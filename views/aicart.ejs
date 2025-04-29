@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Ingredients to Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col justify-center items-center p-4">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center">Add Ingredients to Cart</h1>
+
+        <form id="ingredientForm" class="space-y-4">
+            <textarea id="ingredientsInput" rows="5" placeholder="Enter ingredients, separated by commas" class="w-full p-3 border rounded-lg"></textarea>
+            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">Add to Cart</button>
+        </form>
+
+        <div id="responseMessage" class="mt-4 text-center font-semibold"></div>
+    </div>
+
+    <script>
+        document.getElementById('ingredientForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = document.getElementById('ingredientsInput').value;
+            const ingredientsArray = input.split(',').map(item => item.trim()).filter(item => item.length > 0);
+
+            if (ingredientsArray.length === 0) {
+                document.getElementById('responseMessage').innerText = "Please enter some ingredients!";
+                return;
+            }
+
+            try {
+                const response = await fetch('/cart/add-generated', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ ingredients: ingredientsArray })
+                });
+
+                const text = await response.text();
+                document.getElementById('responseMessage').innerText = text;
+            } catch (error) {
+                console.error(error);
+                document.getElementById('responseMessage').innerText = "Error adding ingredients.";
+            }
+        });
+    </script>
+</body>
+</html>

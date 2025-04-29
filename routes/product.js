@@ -12,6 +12,7 @@ router.get('/', userIsLoggedIn , async function(req,res){
    
     let somethingInCart = false ;
     let cart = await cartModel.findOne({ user: req.session.passport.user }) ;
+    console.log("Cart",cart) ;
     if(cart && cart.products.length > 0) somethingInCart= true ;
      
     //Random products at the top
@@ -45,6 +46,10 @@ router.get('/', userIsLoggedIn , async function(req,res){
 
   res.render("index", { products: resultobject, rnproducts, somethingInCart, cartCount: cart ? cart.products.length : 0 }) ;
 })
+
+router.get('/gencode', (req, res) => {
+    res.render('gencode');
+});
 
 router.get('/delete/:id', validateAdmin ,async function(req,res){
     //fetch all the products

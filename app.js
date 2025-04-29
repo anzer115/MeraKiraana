@@ -16,6 +16,9 @@ const userRouter = require('./routes/user') ;
 const cartRouter = require('./routes/cart') ;
 const paymentRouter = require('./routes/payment') ;
 const orderRouter = require('./routes/order') ;
+const airoutes = require('./routes/ai.routes') ;
+const productRoutes = require("./routes/product.routes");
+
 const cors = require('cors');
 
 app.use(cors());
@@ -42,6 +45,8 @@ app.use("/users", userRouter) ;
 app.use("/cart", cartRouter) ;
 app.use("/payment", paymentRouter) ;
 app.use("/order", orderRouter) ;
+app.use('/ai',airoutes) ;
+app.use("/api", productRoutes);
 
 app.listen(process.env.PORT || 3000) ;
 

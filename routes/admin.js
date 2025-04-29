@@ -9,33 +9,33 @@ const { productModel } = require('../models/product') ;
 const { categoryModel } = require('../models/category');
 
 
-//A route for creating adming to be in Development Environment 
-if(
-    typeof process.env.NODE_ENV !== undefined && 
-    process.env.NODE_ENV === "DEVELOPMENT")
-    {
-    router.get("/create", async function(req,res){
-       try{
-        let salt = await bcrypt.genSalt(10) ;
-        let hash = await bcrypt.hash("Anzer@123",salt) ;
-        
-        let user = new adminModel({
-            name: "Anzer Bin Ubaid",
-            email: "anzer1255ubaid@gmail.com",
-            password: hash,
-            role: "admin",
-        }) ;
-        await user.save() ;
-
-        let token = jwt.sign({ email: "anzer1255ubaid@gmail.com", admin: true }, process.env.JWT_KEY) ;
-        res.cookie("token",token) ;
-        res.send("admin created successfully") ;
-
-       } catch(err){
-        res.send(err.message) ;
-       }
-    }) ;
-}
+if (process.env.NODE_ENV === "DEVELOPMENT") {
+    router.get("/create", async function (req, res) {
+      try {
+        const existing = await adminModel.findOne({ email: "admin@test.com" });
+        if (existing) return res.send("Admin already exists");
+  
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash("12345678", salt);
+  
+        const user = new adminModel({
+          name: "admin",
+          email: "admin@test.com",
+          password: hash,
+          role: "admin",
+        });
+  
+        await user.save();
+  
+        const token = jwt.sign({ email: "admin@test.com", admin: true }, process.env.JWT_KEY);
+        res.cookie("token", token);
+        res.send("Admin created successfully");
+      } catch (err) {
+        res.send(err.message);
+      }
+    });
+  }
+  
 
 router.get('/login', function(req,res){
     res.render("admin_login") ;
@@ -47,7 +47,7 @@ router.post('/login', async function(req,res){
     if(!admin) return res.send("Something Broke") ;
     let valid = await bcrypt.compare(password,admin.password) ;
     if(valid){
-        let token = jwt.sign({ email: "anzer1255ubaid@gmail.com", admin: true }, process.env.JWT_KEY) ;
+        let token = jwt.sign({ email: "admin@test.com", admin: true }, process.env.JWT_KEY) ;
         res.cookie("token",token) ;
         res.redirect('/admin/dashboard') ;
     } else {
