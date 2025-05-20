@@ -21,7 +21,10 @@ const productRoutes = require("./routes/product.routes");
 
 const cors = require('cors');
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // React dev server origin
+  credentials: true, // if you use cookies/sessions
+}));
 app.use(cookieParser()) ;
 app.set('view engine','ejs') ;
 app.use(express.static(path.join(__dirname,'public'))) ;

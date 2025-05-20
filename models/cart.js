@@ -20,6 +20,11 @@ const cartSchema = mongoose.Schema({
         required: true,
         
     },
+    isAICart: {
+    type: Boolean,
+    default: false, 
+  },
+  dishName: { type: String }
 });
 
 // Joi validation schema

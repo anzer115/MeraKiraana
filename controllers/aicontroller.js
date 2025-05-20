@@ -1,4 +1,4 @@
-const generateContent = require("../services/ai.services");
+const {generateContent} = require("../services/ai.services");
 const { fetchProductNames } = require("../models/productmodel");
 const { productModel } = require('../models/product');
 const fetch = require('node-fetch');

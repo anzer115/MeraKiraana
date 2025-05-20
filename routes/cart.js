@@ -133,7 +133,7 @@ router.get("/remove/:id", userIsLoggedIn, async function (req, res) {
 
 router.post('/add-generated', async (req, res) => {
   try {
-    const { ingredients } = req.body; // ingredients will be an array of names
+     const { ingredients, dishName } = req.body;
     if (!ingredients || ingredients.length === 0) {
       return res.status(400).send("No ingredients provided");
     }
@@ -156,7 +156,12 @@ router.post('/add-generated', async (req, res) => {
         user: req.session.passport.user,
         products: [],
         totalprice: 0,
+        isAICart: true,
+        dishName
       });
+    } else {
+      cart.isAICart = true;
+      cart.dishName = dishName; 
     }
 
     // Step 3: Add products into cart
@@ -174,9 +179,6 @@ router.post('/add-generated', async (req, res) => {
     res.status(500).send("Error adding ingredients to cart");
   }
 });
-
-
-
 
 
 module.exports = router;
